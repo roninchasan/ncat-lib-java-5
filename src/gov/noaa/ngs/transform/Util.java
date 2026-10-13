@@ -82,7 +82,7 @@ public class Util {
      */
     private static void loadLcConstants(double e, double esq, String[] zones, Properties prop, Properties zoneDef, String datum) {
         int idx = 0;
-        HashMap<String, Double> l1map = new HashMap<>();
+        HashMap<String, Double> l1map = new HashMap<String, Double>();
         l1map.put("5010", 3.0E6);
         l1map.put("0407", 4.18669258E6);
         l1map.put("0600", 6.0E5);
@@ -91,7 +91,7 @@ public class Util {
         l1map.put("2002", 2.0E5);
         l1map.put("5201", 5.0E5);
         l1map.put("5202", 5.0E5);
-        HashMap<String, Double> l11map = new HashMap<>();
+        HashMap<String, Double> l11map = new HashMap<String, Double>();
         l11map.put("5010", 44.0E0);
         l11map.put("1703", 25.0E0);
         l11map.put("2111", 36.0E0);
@@ -135,8 +135,10 @@ public class Util {
                 if (datum.equals("nad27")) {
                     idx++;
                     prop.setProperty(zones[i] + ".lcConstIndex", Integer.toString(idx));
-                    prop.setProperty(zones[i] + ".l1", Double.toString(l1map.getOrDefault(zones[i], 2.0E6)));
-                    prop.setProperty(zones[i] + ".l11", Double.toString(l11map.getOrDefault(zones[i], 0.0)));
+                    double l1 = l1map.containsKey(zones[i]) ? l1map.get(zones[i]) : 2.0E6;
+                    double l11 = l11map.containsKey(zones[i]) ? l11map.get(zones[i]) : 0.0;
+                    prop.setProperty(zones[i] + ".l1", Double.toString(l1));
+                    prop.setProperty(zones[i] + ".l11", Double.toString(l11));
                 }
 
             }

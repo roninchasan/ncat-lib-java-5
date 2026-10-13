@@ -333,7 +333,7 @@ public class Nadcon extends GridManager {
     @Override
     public ArrayList<String> getDatums() {
         String[] regions = getRegions();
-        ArrayList<String> dlist = new ArrayList<>();
+        ArrayList<String> dlist = new ArrayList<String>();
         for (String reg : regions) {
             String[] regDatums = getDatums(reg);
             for (String rDatum : regDatums) {

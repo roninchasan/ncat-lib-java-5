@@ -84,7 +84,7 @@ public class HarnFbn {
         this.harn = harn;
     }
     public List<HarnFbn> getHF(){
-        hfList = new ArrayList<>();
+        hfList = new ArrayList<HarnFbn>();
         for (int i=0;i<states.length;i++){
             hfList.add(new HarnFbn(states[i],harns[i],fbns[i]));
         }

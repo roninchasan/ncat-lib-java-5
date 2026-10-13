@@ -34,16 +34,36 @@ public abstract class GridManager {
      */
     private static void loadDatumDefinitions() {
         nadconDef = new Properties();
-        try (InputStream stream = GridManager.class.getResourceAsStream(NADCON_PROP_FILE)) {
+        InputStream stream = null;
+        try {
+            stream = GridManager.class.getResourceAsStream(NADCON_PROP_FILE);
             nadconDef.load(stream);
         } catch (IOException ex) {
             logger.fatal("Unable to load NADCON property file", ex);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException ex) {
+                    logger.warn("Unable to close NADCON property file", ex);
+                }
+            }
         }
         vertconDef = new Properties();
-        try (InputStream stream = GridManager.class.getResourceAsStream(VERTCON_PROP_FILE)) {
+        stream = null;
+        try {
+            stream = GridManager.class.getResourceAsStream(VERTCON_PROP_FILE);
             vertconDef.load(stream);
         } catch (IOException ex) {
             logger.fatal("Unable to load VERTCON property file", ex);
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException ex) {
+                    logger.warn("Unable to close VERTCON property file", ex);
+                }
+            }
         }
 
     }

@@ -37,9 +37,12 @@ public class TestDriver {
     }
 
     public void loadTestData() {
-        testData = new ArrayList<>();
-        try (InputStream stream = TestDriver.class.getResourceAsStream(NADCON_TEST_FILE)) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+        testData = new ArrayList<String>();
+        InputStream stream = null;
+        BufferedReader br = null;
+        try {
+            stream = TestDriver.class.getResourceAsStream(NADCON_TEST_FILE);
+            br = new BufferedReader(new InputStreamReader(stream));
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith("#")) {
@@ -48,6 +51,20 @@ public class TestDriver {
             }
         } catch (IOException ex) {
             Logger.getLogger(GridManager.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GridManager.class.getName()).log(Level.WARNING, null, ex);
+                }
+            } else if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GridManager.class.getName()).log(Level.WARNING, null, ex);
+                }
+            }
         }
 
     }

@@ -246,7 +246,7 @@ public class Transformer {
      */
     private int[] getDatumIndex() {
         GridManager g = GridManager.getInstance(transGrid);
-        ArrayList<String> a = new ArrayList<>(Arrays.asList(regionDatums));
+        ArrayList<String> a = new ArrayList<String>(Arrays.asList(regionDatums));
         int[] datumIndex = new int[2];
         datumIndex[0] = a.indexOf(srcDatum);
         datumIndex[1] = a.indexOf(destDatum);
@@ -327,7 +327,7 @@ public class Transformer {
             for (int i = startIdx; i < endIdx; i++) {
                 String fromDatum = regionDatums[i];
                 String toDatum = regionDatums[i + 1];
-                map = new ConcurrentHashMap<>();
+                map = new ConcurrentHashMap<String, Double>();
 //                System.out.println("\nlat:" + result[0] + " lon:" + result[2] + " d1:" + fromDatum + " d2:" + toDatum);
                 if (isNadcon()) {
                     transform(result[0], result[2], fromDatum, toDatum);
@@ -369,7 +369,7 @@ public class Transformer {
                 //from and to datums used only to define grid file
                 String fromDatum = regionDatums[i - 1];
                 String toDatum = regionDatums[i];
-                map = new ConcurrentHashMap<>();
+                map = new ConcurrentHashMap<String, Double>();
                 if (isNadcon()) {
                     transform(result[0], result[2], fromDatum, toDatum);
                     if (map.get("gridError") != null) {
@@ -478,7 +478,7 @@ public class Transformer {
      * @param toDatum destination datum
      */
     private void transform(double tlat, double tlon, String fromDatum, String toDatum) {
-        map = new ConcurrentHashMap<>();
+        map = new ConcurrentHashMap<String, Double>();
         ExecutorService executor = Executors.newFixedThreadPool(6);
 
         for (int j = 0; j < gridParms.length; j++) {
@@ -528,7 +528,6 @@ public class Transformer {
             this.toDatum = toDatum;
         }
 
-        @Override
         public void run() {
             GridManager g = GridManager.getInstance(region, fromDatum, toDatum, gParm, gType, transGrid);
             double[] block = g.getBlock(tlat, tlon, intpGridRows, intpGridCols);

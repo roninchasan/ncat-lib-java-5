@@ -48,7 +48,7 @@ public class Usng {
     }
 
     private static Map<Integer, String> initGzd() {
-        Map<Integer, String> map = new HashMap<>();
+        Map<Integer, String> map = new HashMap<Integer, String>();
         map.put(-80, "C");
         map.put(-72, "D");
         map.put(-64, "E");

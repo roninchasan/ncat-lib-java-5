@@ -19,7 +19,7 @@
 	</target>
 	<target name="compile" depends="init" description="compile the source ">
 		<!-- Compile the java code from ${src} into ${build} -->
-		<javac target="1.8" source="1.8" srcdir="${src}" destdir="${build}">
+		<javac target="1.5" source="1.5" srcdir="${src}" destdir="${build}">
 			<compilerarg line="-Xlint -Xlint:-unchecked -Xlint:-path"/>
 			<classpath refid="classpath"/>
 		</javac>
@@ -80,6 +80,5 @@
 		<!-- Delete the ${build} and ${dist} directory trees -->
 		<delete dir="${build}"/>
 		<delete dir="${dist}"/>
-		<delete dir="${docs}"/>
 	</target>
 </project>

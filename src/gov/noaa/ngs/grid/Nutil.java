@@ -38,7 +38,7 @@ public class Nutil {
     private static final String META_CONFIG = "/gov/noaa/ngs/grid/resources/meta.properties";
 
     private static Map<String, String> initRegexMap() {
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<String, String>();
         map.put("hemi", "[NnSsEeWw]");
         map.put("latdms", "[NnSn]?[0-8][0-9][0-5][0-9][0-5][0-9](\\.\\d+)?");
         map.put("londms", "[EeWw]?([0][0-9][0-9][0-5][0-9][0-5][0-9]|[1][0-7][0-9][0-5][0-9][0-5][0-9])(\\.\\d+)?");
